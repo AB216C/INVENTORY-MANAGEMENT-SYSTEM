@@ -1,0 +1,64 @@
+CREATE TABLE Product (
+ProductID INT AUTO_INCREMENT PRIMARY KEY,
+SKU VARCHAR (100) NOT NULL,
+Prod_name VARCHAR (100),
+Description VARCHAR (250),
+Prod_price DECIMAL (10,2),
+Prod_quantity DECIMAL (15,2) NOT NULL,
+Reorder_level INT
+);
+
+
+CREATE TABLE Supplier (
+SupplierID INT AUTO_INCREMENT PRIMARY KEY,
+Supp_name VARCHAR (100) NOT NULL,
+Phone VARCHAR (100),
+Email VARCHAR (100) UNIQUE,
+Address VARCHAR (100) NOT NULL,
+);
+
+CREATE TABLE Customer (
+CustomerID INT AUTO_INCREMENT PRIMARY KEY,
+Cust_name VARCHAR (100) NOT NULL,
+Phone VARCHAR (100),
+Email VARCHAR (100) UNIQUE,
+Address VARCHAR (100) NOT NULL
+);
+
+
+CREATE TABLE Receiving (
+ReceivingID INT AUTO_INCREMENT PRIMARY KEY,
+SupplierID INT,
+ProductID INT,
+Quantity_received DECIMAL(15,2),
+Unit_Cost DECIMAL (10,2),
+Receiving_date DATE,
+
+FOREIGN KEY (SupplierID) REFERENCES Supplier (SupplierID),
+FOREIGN KEY(ProductID) REFERENCES Product (ProductID)
+);
+
+
+CREATE TABLE Inventory (
+InventoryID INT AUTO_INCREMENT PRIMARY KEY,
+ProductID INT,
+Stock_level INT,
+Location VARCHAR (50) UNIQUE,
+Last_updated TIMESTAMP,
+
+FOREIGN KEY(ProductID) REFERENCES Product (ProductID)
+);
+
+CREATE TABLE Sale (
+SaleID INT AUTO_INCREMENT PRIMARY KEY,
+CustomerID INT,
+ProductID INT,
+Quantity_sold DECIMAL(15,2),
+Unit_price DECIMAL(10,2),
+Sold_date TIMESTAMP,
+
+FOREIGN KEY(CustomerID) REFERENCES Customer (CustomerID),
+FOREIGN KEY(ProductID) REFERENCES Product (ProductID)
+);
+
+
