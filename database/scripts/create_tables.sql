@@ -1,4 +1,4 @@
-Table1: Product
+-- Table1: Product
 CREATE TABLE Product (
 ProductID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 SKU VARCHAR (100) NOT NULL UNIQUE,
@@ -8,7 +8,7 @@ Prod_price DECIMAL (10,2) NOT NULL CHECK(Prod_price >=0),
 Reorder_level INT NOT NULL CHECK(Reorder_level >=0)
 );
 
-Table2: Supplier
+-- Table2: Supplier
 CREATE TABLE Supplier (
 SupplierID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 Supp_name VARCHAR (100) NOT NULL,
@@ -17,7 +17,7 @@ Email VARCHAR (100) UNIQUE,
 Address VARCHAR (100) NOT NULL
 );
 
-Table3: Customer
+-- Table3: Customer
 CREATE TABLE Customer (
 CustomerID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 Cust_name VARCHAR (100) NOT NULL,
@@ -26,7 +26,7 @@ Email VARCHAR (100) UNIQUE,
 Address VARCHAR (100) NOT NULL
 );
 
-Table4: Receiving
+-- Table4: Receiving
 CREATE TABLE Receiving_Header (
 ReceivingID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 SupplierID UUID NOT NULL,
@@ -47,7 +47,7 @@ FOREIGN KEY(ProductID) REFERENCES Product (ProductID)
 
 );
 
-TABLE5:Sale
+-- TABLE5:Sale
 CREATE TABLE Sale_Header(
 SaleID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 CustomerID UUID NOT NULL,
@@ -69,7 +69,7 @@ FOREIGN KEY(ProductID) REFERENCES Product (ProductID)
 
 );
 
-Table5: Inventory
+-- Table5: Inventory
 CREATE TABLE Inventory (
 InventoryID UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 ProductID UUID NOT NULL,
@@ -81,3 +81,6 @@ Last_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY(ProductID) REFERENCES Product (ProductID),
 UNIQUE(ProductID, Location)
 );
+
+
+SELECT current_database();
