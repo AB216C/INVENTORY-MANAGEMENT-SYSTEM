@@ -162,6 +162,16 @@ VALUES
 );
 
 
+INSERT INTO Inventory (ProductID, Stock_level, Location)
+
+VALUES
+((SELECT ProductID FROM Product WHERE SKU = 'RD-45'), 6 , '200-A1'),
+((SELECT ProductID FROM Product WHERE SKU = 'RD-45'), 7 , '200-A6'),
+((SELECT ProductID FROM Product WHERE SKU = 'RD-30'), 10 , '100-B2'),
+((SELECT ProductID FROM Product WHERE SKU = 'RD-30'), 2 , '200-B1'),
+((SELECT ProductID FROM Product WHERE SKU = 'RD-45-A'), 10 , '90-A1')
+
+RETURNING InventoryID, ProductID, Stock_level, Location, Last_updated;
 
 
 
